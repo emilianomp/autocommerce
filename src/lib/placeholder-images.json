@@ -1,3 +1,76 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "1",
+      "description": "A sleek, modern sports car in red.",
+      "imageUrl": "https://images.unsplash.com/photo-1506610654-064fbba4780c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzcG9ydHMlMjBjYXJ8ZW58MHx8fHwxNzYzOTc2NTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sports car"
+    },
+    {
+      "id": "2",
+      "description": "A classic vintage car in pristine condition.",
+      "imageUrl": "https://images.unsplash.com/photo-1536168483275-f5736f5c844b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx2aW50YWdlJTIwY2FyfGVufDB8fHx8MTc2MzkyMDU3MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "vintage car"
+    },
+    {
+      "id": "3",
+      "description": "A rugged off-road SUV ready for adventure.",
+      "imageUrl": "https://images.unsplash.com/photo-1604969653922-6c974c5f8234?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzdXYlMjBvZmZyb2FkfGVufDB8fHx8MTc2Mzk5NzU5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "suv offroad"
+    },
+    {
+      "id": "4",
+      "description": "A luxury sedan with a glossy black finish.",
+      "imageUrl": "https://images.unsplash.com/photo-1698816688678-a3f838fd4fe0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBzZWRhbnxlbnwwfHx8fDE3NjM5NTk1NDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "luxury sedan"
+    },
+    {
+      "id": "5",
+      "description": "A compact and efficient city car.",
+      "imageUrl": "https://images.unsplash.com/photo-1749091316746-ee39567b2db6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjaXR5JTIwY2FyfGVufDB8fHx8MTc2MzkyNjc4OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city car"
+    },
+    {
+      "id": "6",
+      "description": "A futuristic electric vehicle concept.",
+      "imageUrl": "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxlbGVjdHJpYyUyMHZlaGljbGV8ZW58MHx8fHwxNzYzOTk3NTk0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "electric vehicle"
+    },
+    {
+      "id": "7",
+      "description": "A powerful muscle car in bright yellow.",
+      "imageUrl": "https://images.unsplash.com/photo-1609386464913-4cbfa39de540?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtdXNjbGUlMjBjYXJ8ZW58MHx8fHwxNzYzOTk3NTk1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "muscle car"
+    },
+    {
+      "id": "8",
+      "description": "A spacious family minivan.",
+      "imageUrl": "https://images.unsplash.com/photo-1758409313902-db8e331f71cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxmYW1pbHklMjBtaW5pdmFufGVufDB8fHx8MTc2Mzk5NzU5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "family minivan"
+    },
+    {
+      "id": "9",
+      "description": "A high-performance hypercar.",
+      "imageUrl": "https://images.unsplash.com/photo-1617654112368-307921291f42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxoeXBlcmNhcnxlbnwwfHx8fDE3NjM5OTc1OTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "hypercar"
+    },
+    {
+      "id": "10",
+      "description": "A convertible sports car for sunny days.",
+      "imageUrl": "https://images.unsplash.com/photo-1581527393641-370d5be04856?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjb252ZXJ0aWJsZXxlbnwwfHx8fDE3NjM5OTc1OTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "convertible"
+    },
+    {
+      "id": "11",
+      "description": "A reliable pickup truck for heavy duty work.",
+      "imageUrl": "https://images.unsplash.com/photo-1551830820-330a71b99659?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwaWNrdXAlMjB0cnVja3xlbnwwfHx8fDE3NjM5ODgxNjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pickup truck"
+    },
+    {
+      "id": "12",
+      "description": "An elegant coupe with a silver finish.",
+      "imageUrl": "https://images.unsplash.com/photo-1671399415491-f3284fd4d1a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y291cGUlMjBzaWx2ZXJ8ZW58MHx8fHwxNzYzOTk3NTk0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coupe silver"
+    }
+  ]
 }
