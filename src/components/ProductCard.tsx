@@ -6,7 +6,7 @@ import type { Product } from '@/lib/types';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { useCart } from '@/hooks/useCart';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Eye } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -48,13 +48,22 @@ export default function ProductCard({ product }: ProductCardProps) {
           {formattedPrice}
         </CardDescription>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-4 pt-0 grid grid-cols-2 gap-2">
+        <Button 
+          variant="outline"
+          asChild
+          className="w-full"
+        >
+          <Link href={`/products/${product.id}`}>
+            <Eye className="mr-2 h-4 w-4" /> Ver Detalle
+          </Link>
+        </Button>
         <Button 
           className="w-full" 
           onClick={() => addToCart(product)}
           aria-label={`Añadir ${product.name} al carrito`}
         >
-          <ShoppingCart className="mr-2 h-4 w-4" /> Añadir al Carrito
+          <ShoppingCart className="mr-2 h-4 w-4" /> Añadir
         </Button>
       </CardFooter>
     </Card>
