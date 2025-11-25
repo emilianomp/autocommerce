@@ -1,18 +1,32 @@
 "use client";
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ShoppingCart, User as UserIcon, LogOut, Shield, Menu } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
-const NavLink = ({ href, children, onClick }: { href: string, children: React.ReactNode, onClick?: () => void }) => (
-  <Link href={href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" onClick={onClick}>
-    {children}
-  </Link>
-);
+const NavLink = ({ href, children, onClick }: { href: string, children: React.ReactNode, onClick?: () => void }) => {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+  
+  return (
+    <Link 
+      href={href} 
+      className={cn(
+        "text-sm font-medium transition-colors hover:text-foreground",
+        isActive ? "text-foreground" : "text-muted-foreground"
+      )}
+      onClick={onClick}
+    >
+      {children}
+    </Link>
+  );
+};
 
 export default function Header() {
   const { cartItems } = useCart();
@@ -109,3 +123,5 @@ export default function Header() {
     </header>
   );
 }
+
+    
