@@ -7,7 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'AutoCommerce',
+  title: 'ZeusCar',
   description: 'El mejor lugar para comprar tu próximo auto.',
 };
 

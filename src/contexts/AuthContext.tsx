@@ -31,13 +31,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     try {
-      const storedUser = localStorage.getItem('autocommerce_user');
+      const storedUser = localStorage.getItem('zeuscar_user');
       if (storedUser) {
         setUser(JSON.parse(storedUser));
       }
     } catch (error) {
       console.error("Error al analizar el usuario desde localStorage", error);
-      localStorage.removeItem('autocommerce_user');
+      localStorage.removeItem('zeuscar_user');
     } finally {
       setLoading(false);
     }
@@ -51,17 +51,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const adminUser: User = { 
         id: 'admin', 
         name: 'Admin',
-        email: 'admin@autocommerce.com',
+        email: 'admin@zeuscar.com',
         role: 'admin' 
       };
-      localStorage.setItem('autocommerce_user', JSON.stringify(adminUser));
+      localStorage.setItem('zeuscar_user', JSON.stringify(adminUser));
       setUser(adminUser);
       router.push('/admin');
       return;
     }
     
     // Regular user login (simulated)
-    const storedUsers = JSON.parse(localStorage.getItem('autocommerce_users') || '[]');
+    const storedUsers = JSON.parse(localStorage.getItem('zeuscar_users') || '[]');
     const foundUser = storedUsers.find((u: RegistrationData) => u.name === name && u.password === password);
 
     if (foundUser) {
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         email: foundUser.email,
         role: 'user',
       };
-      localStorage.setItem('autocommerce_user', JSON.stringify(regularUser));
+      localStorage.setItem('zeuscar_user', JSON.stringify(regularUser));
       setUser(regularUser);
       router.push('/profile');
     } else {
@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const register = (data: RegistrationData) => {
-    const storedUsers = JSON.parse(localStorage.getItem('autocommerce_users') || '[]');
+    const storedUsers = JSON.parse(localStorage.getItem('zeuscar_users') || '[]');
     const userExists = storedUsers.some((u: RegistrationData) => u.email === data.email || u.name === data.name);
     
     if (userExists) {
@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const newUser = { ...data };
     storedUsers.push(newUser);
-    localStorage.setItem('autocommerce_users', JSON.stringify(storedUsers));
+    localStorage.setItem('zeuscar_users', JSON.stringify(storedUsers));
     
     toast({
       title: '¡Registro exitoso!',
@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('autocommerce_user');
+    localStorage.removeItem('zeuscar_user');
     setUser(null);
     router.push('/');
   };

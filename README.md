@@ -1,4 +1,4 @@
-# AutoCommerce - Final Project
+# ZeusCar - Final Project
 
 This is a complete, functional, and optimized e-commerce application for automobiles, built with Next.js, TypeScript, and Tailwind CSS. It simulates a real-world client delivery.
 

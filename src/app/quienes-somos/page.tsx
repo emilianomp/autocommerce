@@ -15,7 +15,7 @@ export default function AboutPage() {
             Quiénes Somos
           </CardTitle>
           <CardDescription className="mx-auto mt-4 max-w-3xl text-lg !text-muted-foreground">
-            En AutoCommerce, nos apasiona conectar a los entusiastas de los automóviles con vehículos excepcionales. Creemos que comprar un auto debe ser una experiencia emocionante y sin complicaciones. Nuestro equipo selecciona cuidadosamente cada vehículo de nuestro inventario para garantizar la calidad, el rendimiento y el valor. Desde clásicos atemporales hasta los superdeportivos más modernos, nuestra misión es ayudarte a encontrar el auto que no solo te lleve a tu destino, sino que también te inspire en el camino.
+            En ZeusCar, nos apasiona conectar a los entusiastas de los automóviles con vehículos excepcionales. Creemos que comprar un auto debe ser una experiencia emocionante y sin complicaciones. Nuestro equipo selecciona cuidadosamente cada vehículo de nuestro inventario para garantizar la calidad, el rendimiento y el valor. Desde clásicos atemporales hasta los superdeportivos más modernos, nuestra misión es ayudarte a encontrar el auto que no solo te lleve a tu destino, sino que también te inspire en el camino.
           </CardDescription>
         </CardHeader>
       </Card>

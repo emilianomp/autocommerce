@@ -21,18 +21,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     try {
-      const storedCart = localStorage.getItem('autocommerce_cart');
+      const storedCart = localStorage.getItem('zeuscar_cart');
       if (storedCart) {
         setCartItems(JSON.parse(storedCart));
       }
     } catch (error) {
       console.error("Error al analizar el carrito desde localStorage", error);
-      localStorage.removeItem('autocommerce_cart');
+      localStorage.removeItem('zeuscar_cart');
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('autocommerce_cart', JSON.stringify(cartItems));
+    localStorage.setItem('zeuscar_cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
   const addToCart = (product: Product) => {
