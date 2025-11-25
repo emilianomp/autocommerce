@@ -1,21 +1,38 @@
 "use client";
 
 import Link from 'next/link';
-import { ShoppingCart, User as UserIcon, LogOut, Shield } from 'lucide-react';
+import { ShoppingCart, User as UserIcon, LogOut, Shield, Menu } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from './ui/button';
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+import { useState } from 'react';
+
+const NavLink = ({ href, children, onClick }: { href: string, children: React.ReactNode, onClick?: () => void }) => (
+  <Link href={href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" onClick={onClick}>
+    {children}
+  </Link>
+);
 
 export default function Header() {
   const { cartItems } = useCart();
   const { user, logout } = useAuth();
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const navLinks = (
+    <>
+      <NavLink href="/" onClick={() => setIsSheetOpen(false)}>Inicio</NavLink>
+      <NavLink href="/about" onClick={() => setIsSheetOpen(false)}>Quiénes Somos</NavLink>
+      <NavLink href="/contact" onClick={() => setIsSheetOpen(false)}>Contacto</NavLink>
+    </>
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2 mr-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -40,7 +57,10 @@ export default function Header() {
             AutoCommerce
           </span>
         </Link>
-        <nav className="flex items-center gap-4">
+        <nav className="hidden md:flex items-center gap-6">
+          {navLinks}
+        </nav>
+        <div className="flex items-center gap-2">
           <Link href="/cart" className="relative" aria-label={`Carrito de compras con ${totalItems} artículos`}>
             <Button variant="ghost" size="icon">
               <ShoppingCart className="h-5 w-5" />
@@ -65,12 +85,26 @@ export default function Header() {
             </>
           ) : (
             <Link href="/login" aria-label="Iniciar Sesión">
-               <Button variant="ghost" size="icon">
+               <Button variant="ghost" size="icon" className='hidden md:inline-flex'>
                 <UserIcon className="h-5 w-5" />
               </Button>
             </Link>
           )}
-        </nav>
+
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Abrir menú</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <nav className="grid gap-6 text-lg font-medium mt-8">
+                {navLinks}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );
