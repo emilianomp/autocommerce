@@ -18,7 +18,7 @@ export default async function Home() {
             Encuentra Tu Próximo Viaje
           </CardTitle>
           <CardDescription className="max-w-2xl text-base text-muted-foreground md:text-lg">
-            Explora nuestra colección curada de automóviles premium. El viaje hacia el auto de tus sueños comienza aquí.
+            Explora nuestra colección de automóviles premium. El viaje hacia el auto de tus sueños comienza aquí.
           </CardDescription>
         </CardHeader>
       </Card>
