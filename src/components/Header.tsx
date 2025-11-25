@@ -47,8 +47,8 @@ export default function Header() {
   const navLinks = (
     <>
       <NavLink href="/" onClick={() => setIsSheetOpen(false)}>Inicio</NavLink>
-      <NavLink href="/about" onClick={() => setIsSheetOpen(false)}>Quiénes Somos</NavLink>
-      <NavLink href="/contact" onClick={() => setIsSheetOpen(false)}>Contacto</NavLink>
+      <NavLink href="/quienes-somos" onClick={() => setIsSheetOpen(false)}>Quiénes Somos</NavLink>
+      <NavLink href="/contacto" onClick={() => setIsSheetOpen(false)}>Contacto</NavLink>
     </>
   );
 
