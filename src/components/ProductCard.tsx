@@ -22,6 +22,8 @@ export default function ProductCard({ product }: ProductCardProps) {
     maximumFractionDigits: 0,
   }).format(product.price);
 
+  const displayName = `${product.brand} ${product.model} ${product.version}`;
+
   return (
     <Card className="flex h-full flex-col overflow-hidden rounded-lg shadow-md transition-shadow hover:shadow-xl">
       <Link href={`/products/${product.id}`} className="block">
@@ -29,7 +31,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="aspect-video overflow-hidden">
             <Image
               src={product.imageUrl}
-              alt={product.name}
+              alt={displayName}
               data-ai-hint={product.imageHint}
               width={600}
               height={400}
@@ -41,7 +43,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <CardContent className="flex-grow p-4">
         <CardTitle className="font-headline text-lg tracking-tight">
           <Link href={`/products/${product.id}`} className="hover:text-primary">
-            {product.name}
+            {displayName}
           </Link>
         </CardTitle>
         <CardDescription className="mt-1 text-base font-semibold text-primary">
@@ -61,7 +63,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <Button 
           className="w-full" 
           onClick={() => addToCart(product)}
-          aria-label={`Añadir ${product.name} al carrito`}
+          aria-label={`Añadir ${displayName} al carrito`}
         >
           <ShoppingCart className="mr-2 h-4 w-4" /> Añadir
         </Button>

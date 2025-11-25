@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Trash2, ShoppingBag, Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { CartItem } from '@/lib/types';
 
 export default function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, clearCart, cartTotal } = useCart();
@@ -30,6 +31,7 @@ export default function CartPage() {
   }, [user, authLoading, router]);
 
   const formattedTotal = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(cartTotal);
+  const getDisplayName = (item: CartItem) => `${item.brand} ${item.model} ${item.version}`;
 
   if (authLoading || !user) {
     return (
@@ -76,9 +78,9 @@ export default function CartPage() {
                   {cartItems.map(item => (
                     <TableRow key={item.id}>
                       <TableCell>
-                        <Image src={item.imageUrl} alt={item.name} data-ai-hint={item.imageHint} width={100} height={75} className="rounded-md object-cover" />
+                        <Image src={item.imageUrl} alt={getDisplayName(item)} data-ai-hint={item.imageHint} width={100} height={75} className="rounded-md object-cover" />
                       </TableCell>
-                      <TableCell className="font-medium">{item.name}</TableCell>
+                      <TableCell className="font-medium">{getDisplayName(item)}</TableCell>
                       <TableCell>{new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(item.price)}</TableCell>
                       <TableCell>
                         <Input
@@ -87,12 +89,12 @@ export default function CartPage() {
                           value={item.quantity}
                           onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
                           className="w-20"
-                          aria-label={`Cantidad para ${item.name}`}
+                          aria-label={`Cantidad para ${getDisplayName(item)}`}
                         />
                       </TableCell>
                       <TableCell>{new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(item.price * item.quantity)}</TableCell>
                       <TableCell>
-                        <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)} aria-label={`Eliminar ${item.name} del carrito`}>
+                        <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)} aria-label={`Eliminar ${getDisplayName(item)} del carrito`}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </TableCell>

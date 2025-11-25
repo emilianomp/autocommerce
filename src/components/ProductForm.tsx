@@ -20,7 +20,9 @@ import { Loader2 } from 'lucide-react';
 
 
 const formSchema = z.object({
-  name: z.string().min(1, 'El nombre es obligatorio'),
+  brand: z.string().min(1, 'La marca es obligatoria'),
+  model: z.string().min(1, 'El modelo es obligatorio'),
+  version: z.string().min(1, 'La versión es obligatoria'),
   price: z.coerce.number().positive('El precio debe ser mayor que 0'),
   description: z.string().min(10, 'La descripción debe tener al menos 10 caracteres'),
   category: z.string().min(1, 'La categoría es obligatoria'),
@@ -46,7 +48,9 @@ export default function ProductForm({ product }: ProductFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: product?.name || '',
+      brand: product?.brand || '',
+      model: product?.model || '',
+      version: product?.version || '',
       price: product?.price || 0,
       description: product?.description || '',
       category: product?.category || '',
@@ -96,34 +100,60 @@ export default function ProductForm({ product }: ProductFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FormField
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+           <FormField
             control={form.control}
-            name="name"
+            name="brand"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nombre del Auto</FormLabel>
+                <FormLabel>Marca</FormLabel>
                 <FormControl>
-                  <Input placeholder="ej., Porsche 911 Carrera" {...field} />
+                  <Input placeholder="ej., Porsche" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
+           <FormField
             control={form.control}
-            name="price"
+            name="model"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Precio</FormLabel>
+                <FormLabel>Modelo</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="ej., 114400" {...field} />
+                  <Input placeholder="ej., 911 Carrera" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+           <FormField
+            control={form.control}
+            name="version"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Versión</FormLabel>
+                <FormControl>
+                  <Input placeholder="ej., S" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
+        <FormField
+          control={form.control}
+          name="price"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Precio</FormLabel>
+              <FormControl>
+                <Input type="number" placeholder="ej., 114400" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="description"

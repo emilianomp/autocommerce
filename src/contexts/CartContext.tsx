@@ -36,6 +36,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }, [cartItems]);
 
   const addToCart = (product: Product) => {
+    const displayName = `${product.brand} ${product.model} ${product.version}`;
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id);
       if (existingItem) {
@@ -47,7 +48,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
     toast({
       title: "Añadido al Carrito",
-      description: `${product.name} ha sido añadido a tu carrito.`,
+      description: `${displayName} ha sido añadido a tu carrito.`,
     });
   };
 

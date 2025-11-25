@@ -19,10 +19,11 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredProducts = useMemo(() => {
-    return initialProducts.filter(product =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    return initialProducts.filter(product => {
+      const fullName = `${product.brand} ${product.model} ${product.version}`.toLowerCase();
+      return fullName.includes(searchTerm.toLowerCase()) ||
+             product.category.toLowerCase().includes(searchTerm.toLowerCase())
+    });
   }, [initialProducts, searchTerm]);
 
   const paginatedProducts = useMemo(() => {
@@ -45,7 +46,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
             type="text"
-            placeholder="Buscar por nombre o categoría..."
+            placeholder="Buscar por marca, modelo o categoría..."
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);

@@ -23,6 +23,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     style: 'currency',
     currency: 'USD',
   }).format(product.price);
+  
+  const displayName = `${product.brand} ${product.model} ${product.version}`;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -32,7 +34,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="aspect-video md:aspect-auto md:h-full">
               <Image
                 src={product.imageUrl}
-                alt={product.name}
+                alt={displayName}
                 data-ai-hint={product.imageHint}
                 width={800}
                 height={600}
@@ -44,7 +46,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <CardContent className="flex-grow p-6 md:p-8">
               <Badge variant="secondary" className="mb-2">{product.category}</Badge>
               <CardTitle className="font-headline text-3xl font-bold tracking-tight md:text-4xl">
-                {product.name}
+                {displayName}
               </CardTitle>
               <CardDescription className="mt-4 text-lg text-muted-foreground">
                 {product.description}

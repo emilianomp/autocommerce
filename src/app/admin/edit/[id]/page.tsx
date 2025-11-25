@@ -44,6 +44,8 @@ export default function EditProductPage() {
       fetchProduct();
     }
   }, [id, user, router, toast]);
+  
+  const getDisplayName = (p: Product | null) => p ? `${p.brand} ${p.model} ${p.version}`: '';
 
   if (authLoading || loading || !user) {
     return (
@@ -58,7 +60,7 @@ export default function EditProductPage() {
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
           <CardTitle className="font-headline text-3xl">Editar Detalles del Auto</CardTitle>
-          <CardDescription>Actualiza la información para {product?.name}.</CardDescription>
+          <CardDescription>Actualiza la información para {getDisplayName(product)}.</CardDescription>
         </CardHeader>
         <CardContent>
           {product && <ProductForm product={product} />}

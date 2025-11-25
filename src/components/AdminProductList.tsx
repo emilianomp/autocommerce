@@ -52,6 +52,8 @@ export default function AdminProductList() {
     setProductToDelete(product);
     setIsAlertOpen(true);
   };
+  
+  const getDisplayName = (product: Product) => `${product.brand} ${product.model} ${product.version}`;
 
   const handleDelete = async () => {
     if (!productToDelete) return;
@@ -59,7 +61,7 @@ export default function AdminProductList() {
     try {
       await deleteProduct(productToDelete.id);
       setProducts(products.filter(p => p.id !== productToDelete.id));
-      toast({ title: 'Éxito', description: `${productToDelete.name} ha sido eliminado.` });
+      toast({ title: 'Éxito', description: `${getDisplayName(productToDelete)} ha sido eliminado.` });
     } catch (error) {
       toast({ title: 'Error', description: 'No se pudo eliminar el producto.', variant: 'destructive' });
     } finally {
@@ -92,7 +94,7 @@ export default function AdminProductList() {
             <TableHeader>
               <TableRow>
                 <TableHead className="hidden w-[100px] sm:table-cell">Imagen</TableHead>
-                <TableHead>Nombre</TableHead>
+                <TableHead>Vehículo</TableHead>
                 <TableHead>Categoría</TableHead>
                 <TableHead className="hidden md:table-cell">Precio</TableHead>
                 <TableHead>
@@ -105,7 +107,7 @@ export default function AdminProductList() {
                 <TableRow key={product.id}>
                   <TableCell className="hidden sm:table-cell">
                     <Image
-                      alt={product.name}
+                      alt={getDisplayName(product)}
                       className="aspect-square rounded-md object-cover"
                       height="64"
                       src={product.imageUrl}
@@ -113,7 +115,7 @@ export default function AdminProductList() {
                       width="64"
                     />
                   </TableCell>
-                  <TableCell className="font-medium">{product.name}</TableCell>
+                  <TableCell className="font-medium">{getDisplayName(product)}</TableCell>
                   <TableCell>{product.category}</TableCell>
                   <TableCell className="hidden md:table-cell">
                     {new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(product.price)}
@@ -151,7 +153,7 @@ export default function AdminProductList() {
             <AlertDialogTitle>¿Estás absolutamente seguro?</AlertDialogTitle>
             <AlertDialogDescription>
               Esta acción no se puede deshacer. Esto eliminará permanentemente el auto
-              "{productToDelete?.name}" de tu inventario.
+              "{productToDelete ? getDisplayName(productToDelete) : ''}" de tu inventario.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
