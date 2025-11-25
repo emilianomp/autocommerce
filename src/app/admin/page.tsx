@@ -1,10 +1,38 @@
+"use client";
+
 import AdminProductList from '@/components/AdminProductList';
 import { Button } from '@/components/ui/button';
 import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlusCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from '@/hooks/useAuth';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@/hooks/use-toast';
+import { Loader2 } from 'lucide-react';
+
 
 export default function AdminPage() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (!loading && (!user || user.role !== 'admin')) {
+      toast({ title: 'Acceso Denegado', description: 'Debes ser administrador para acceder a esta página.', variant: 'destructive'});
+      router.push('/login');
+    }
+  }, [user, loading, router, toast]);
+
+  if (loading || !user || user.role !== 'admin') {
+    return (
+      <div className="flex h-[50vh] items-center justify-center">
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between">

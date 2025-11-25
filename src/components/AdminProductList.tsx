@@ -26,7 +26,7 @@ export default function AdminProductList() {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!authLoading && !user) {
+    if (!authLoading && (!user || user.role !== 'admin')) {
       router.push('/login');
     }
   }, [user, authLoading, router]);
@@ -43,7 +43,7 @@ export default function AdminProductList() {
         setLoading(false);
       }
     };
-    if(user) {
+    if(user && user.role === 'admin') {
         fetchProducts();
     }
   }, [user, toast]);
@@ -70,17 +70,9 @@ export default function AdminProductList() {
     }
   };
 
-  if (authLoading || !user) {
+  if (authLoading || loading || !user || user.role !== 'admin') {
     return (
       <div className="flex h-[50vh] items-center justify-center">
-        <Loader2 className="h-12 w-12 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-       <div className="flex h-[50vh] items-center justify-center">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
       </div>
     );
@@ -150,7 +142,7 @@ export default function AdminProductList() {
       <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Estás absolutamente seguro?</AlertDialogTitle>
+            <AlertDialogTitle>¿Estás absolutely seguro?</AlertDialogTitle>
             <AlertDialogDescription>
               Esta acción no se puede deshacer. Esto eliminará permanentemente el auto
               "{productToDelete ? getDisplayName(productToDelete) : ''}" de tu inventario.

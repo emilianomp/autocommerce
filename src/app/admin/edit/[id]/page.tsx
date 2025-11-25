@@ -19,13 +19,16 @@ export default function EditProductPage() {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!authLoading && !user) {
-      router.push('/login');
+    if (!authLoading) {
+      if (!user || user.role !== 'admin') {
+        toast({ title: 'Acceso Denegado', description: 'Debes ser administrador para acceder a esta página.', variant: 'destructive'});
+        router.push('/login');
+      }
     }
-  }, [user, authLoading, router]);
+  }, [user, authLoading, router, toast]);
 
   useEffect(() => {
-    if (user && typeof id === 'string') {
+    if (user && user.role === 'admin' && typeof id === 'string') {
       const fetchProduct = async () => {
         try {
           const data = await getProductById(id);
@@ -42,12 +45,14 @@ export default function EditProductPage() {
         }
       };
       fetchProduct();
+    } else {
+      setLoading(false);
     }
   }, [id, user, router, toast]);
   
   const getDisplayName = (p: Product | null) => p ? `${p.brand} ${p.model} ${p.version}`: '';
 
-  if (authLoading || loading || !user) {
+  if (authLoading || loading || !user || user.role !== 'admin') {
     return (
       <div className="flex h-[50vh] items-center justify-center">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
