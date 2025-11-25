@@ -15,7 +15,7 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
   
-  const formattedPrice = new Intl.NumberFormat('en-US', {
+  const formattedPrice = new Intl.NumberFormat('es-ES', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 0,
@@ -52,9 +52,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         <Button 
           className="w-full" 
           onClick={() => addToCart(product)}
-          aria-label={`Add ${product.name} to cart`}
+          aria-label={`Añadir ${product.name} al carrito`}
         >
-          <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
+          <ShoppingCart className="mr-2 h-4 w-4" /> Añadir al Carrito
         </Button>
       </CardFooter>
     </Card>

@@ -6,8 +6,8 @@ export default function AddProductPage() {
     <div className="container mx-auto px-4 py-8">
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
-          <CardTitle className="font-headline text-3xl">Add New Car</CardTitle>
-          <CardDescription>Fill out the form below to add a new car to the inventory.</CardDescription>
+          <CardTitle className="font-headline text-3xl">Agregar Nuevo Auto</CardTitle>
+          <CardDescription>Completa el formulario a continuación para agregar un nuevo auto al inventario.</CardDescription>
         </CardHeader>
         <CardContent>
           <ProductForm />

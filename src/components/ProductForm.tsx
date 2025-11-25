@@ -20,11 +20,11 @@ import { Loader2 } from 'lucide-react';
 
 
 const formSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  price: z.coerce.number().positive('Price must be greater than 0'),
-  description: z.string().min(10, 'Description must be at least 10 characters'),
-  category: z.string().min(1, 'Category is required'),
-  imageId: z.string().min(1, 'Image is required'),
+  name: z.string().min(1, 'El nombre es obligatorio'),
+  price: z.coerce.number().positive('El precio debe ser mayor que 0'),
+  description: z.string().min(10, 'La descripción debe tener al menos 10 caracteres'),
+  category: z.string().min(1, 'La categoría es obligatoria'),
+  imageId: z.string().min(1, 'La imagen es obligatoria'),
 });
 
 interface ProductFormProps {
@@ -59,7 +59,7 @@ export default function ProductForm({ product }: ProductFormProps) {
     try {
       const selectedImage = PlaceHolderImages.find(img => img.id === values.imageId);
       if (!selectedImage) {
-        throw new Error('Invalid image selected');
+        throw new Error('Imagen seleccionada no válida');
       }
 
       const productData = {
@@ -72,15 +72,15 @@ export default function ProductForm({ product }: ProductFormProps) {
 
       if (product) {
         await updateProduct(product.id, productData);
-        toast({ title: 'Success', description: 'Product updated successfully.' });
+        toast({ title: 'Éxito', description: 'Producto actualizado correctamente.' });
       } else {
         await createProduct(productData);
-        toast({ title: 'Success', description: 'Product created successfully.' });
+        toast({ title: 'Éxito', description: 'Producto creado correctamente.' });
       }
       router.push('/admin');
       router.refresh();
     } catch (error) {
-      toast({ title: 'Error', description: `Failed to ${product ? 'update' : 'create'} product.`, variant: 'destructive' });
+      toast({ title: 'Error', description: `Error al ${product ? 'actualizar' : 'crear'} el producto.`, variant: 'destructive' });
       setIsSubmitting(false);
     }
   };
@@ -102,9 +102,9 @@ export default function ProductForm({ product }: ProductFormProps) {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Car Name</FormLabel>
+                <FormLabel>Nombre del Auto</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., Porsche 911 Carrera" {...field} />
+                  <Input placeholder="ej., Porsche 911 Carrera" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -115,9 +115,9 @@ export default function ProductForm({ product }: ProductFormProps) {
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Price</FormLabel>
+                <FormLabel>Precio</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="e.g., 114400" {...field} />
+                  <Input type="number" placeholder="ej., 114400" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -129,9 +129,9 @@ export default function ProductForm({ product }: ProductFormProps) {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Descripción</FormLabel>
               <FormControl>
-                <Textarea placeholder="Describe the car..." {...field} />
+                <Textarea placeholder="Describe el auto..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -143,9 +143,9 @@ export default function ProductForm({ product }: ProductFormProps) {
               name="category"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>Categoría</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., Sports Car" {...field} />
+                    <Input placeholder="ej., Deportivo" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -156,11 +156,11 @@ export default function ProductForm({ product }: ProductFormProps) {
               name="imageId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Image</FormLabel>
+                  <FormLabel>Imagen</FormLabel>
                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select an image" />
+                        <SelectValue placeholder="Selecciona una imagen" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -169,7 +169,7 @@ export default function ProductForm({ product }: ProductFormProps) {
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormDescription>Choose a placeholder image for the product.</FormDescription>
+                  <FormDescription>Elige una imagen de marcador de posición para el producto.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -177,11 +177,11 @@ export default function ProductForm({ product }: ProductFormProps) {
         </div>
         <div className="flex justify-end gap-4">
             <Button type="button" variant="outline" onClick={() => router.push('/admin')}>
-              Cancel
+              Cancelar
             </Button>
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {product ? 'Update Car' : 'Add Car'}
+              {product ? 'Actualizar Auto' : 'Añadir Auto'}
             </Button>
         </div>
       </form>

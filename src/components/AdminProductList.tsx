@@ -38,7 +38,7 @@ export default function AdminProductList() {
         const data = await getProducts();
         setProducts(data);
       } catch (error) {
-        toast({ title: 'Error', description: 'Failed to fetch products.', variant: 'destructive' });
+        toast({ title: 'Error', description: 'No se pudieron cargar los productos.', variant: 'destructive' });
       } finally {
         setLoading(false);
       }
@@ -59,9 +59,9 @@ export default function AdminProductList() {
     try {
       await deleteProduct(productToDelete.id);
       setProducts(products.filter(p => p.id !== productToDelete.id));
-      toast({ title: 'Success', description: `${productToDelete.name} has been deleted.` });
+      toast({ title: 'Éxito', description: `${productToDelete.name} ha sido eliminado.` });
     } catch (error) {
-      toast({ title: 'Error', description: 'Failed to delete product.', variant: 'destructive' });
+      toast({ title: 'Error', description: 'No se pudo eliminar el producto.', variant: 'destructive' });
     } finally {
       setIsAlertOpen(false);
       setProductToDelete(null);
@@ -91,12 +91,12 @@ export default function AdminProductList() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="hidden w-[100px] sm:table-cell">Image</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead className="hidden md:table-cell">Price</TableHead>
+                <TableHead className="hidden w-[100px] sm:table-cell">Imagen</TableHead>
+                <TableHead>Nombre</TableHead>
+                <TableHead>Categoría</TableHead>
+                <TableHead className="hidden md:table-cell">Precio</TableHead>
                 <TableHead>
-                  <span className="sr-only">Actions</span>
+                  <span className="sr-only">Acciones</span>
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -116,24 +116,24 @@ export default function AdminProductList() {
                   <TableCell className="font-medium">{product.name}</TableCell>
                   <TableCell>{product.category}</TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}
+                    {new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(product.price)}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button aria-haspopup="true" size="icon" variant="ghost">
                           <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
+                          <span className="sr-only">Alternar menú</span>
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuLabel>Acciones</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild>
-                          <Link href={`/admin/edit/${product.id}`} className="flex items-center cursor-pointer"><Edit className="mr-2 h-4 w-4"/>Edit</Link>
+                          <Link href={`/admin/edit/${product.id}`} className="flex items-center cursor-pointer"><Edit className="mr-2 h-4 w-4"/>Editar</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => openDeleteDialog(product)} className="text-red-600 flex items-center cursor-pointer focus:bg-red-50 focus:text-red-700">
-                          <Trash2 className="mr-2 h-4 w-4"/>Delete
+                          <Trash2 className="mr-2 h-4 w-4"/>Eliminar
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -148,15 +148,15 @@ export default function AdminProductList() {
       <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>¿Estás absolutamente seguro?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the car
-              "{productToDelete?.name}" from your inventory.
+              Esta acción no se puede deshacer. Esto eliminará permanentemente el auto
+              "{productToDelete?.name}" de tu inventario.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-destructive hover:bg-destructive/90">Delete</AlertDialogAction>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete} className="bg-destructive hover:bg-destructive/90">Eliminar</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

@@ -41,7 +41,7 @@ export default function Header() {
           </span>
         </Link>
         <nav className="flex items-center gap-4">
-          <Link href="/cart" className="relative" aria-label={`Shopping cart with ${totalItems} items`}>
+          <Link href="/cart" className="relative" aria-label={`Carrito de compras con ${totalItems} artículos`}>
             <Button variant="ghost" size="icon">
               <ShoppingCart className="h-5 w-5" />
             </Button>
@@ -54,17 +54,17 @@ export default function Header() {
           {user ? (
             <>
               <Link href="/admin">
-                 <Button variant="ghost" size="icon" aria-label="Admin Panel">
+                 <Button variant="ghost" size="icon" aria-label="Panel de Administrador">
                     <Shield className="h-5 w-5" />
                   </Button>
               </Link>
-              <Button variant="ghost" size="icon" onClick={logout} aria-label="Log out">
+              <Button variant="ghost" size="icon" onClick={logout} aria-label="Cerrar sesión">
                 <LogOut className="h-5 w-5" />
               </Button>
               <span className="hidden text-sm font-medium sm:block">{user.name}</span>
             </>
           ) : (
-            <Link href="/login" aria-label="Login">
+            <Link href="/login" aria-label="Iniciar Sesión">
                <Button variant="ghost" size="icon">
                 <UserIcon className="h-5 w-5" />
               </Button>

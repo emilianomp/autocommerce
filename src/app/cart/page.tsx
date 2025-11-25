@@ -21,15 +21,15 @@ export default function CartPage() {
   useEffect(() => {
     if (!authLoading && !user) {
       toast({
-        title: "Authentication Required",
-        description: "Please log in to view your cart.",
+        title: "Autenticación Requerida",
+        description: "Por favor, inicia sesión para ver tu carrito.",
         variant: "destructive",
       });
       router.push('/login');
     }
   }, [user, authLoading, router]);
 
-  const formattedTotal = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartTotal);
+  const formattedTotal = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(cartTotal);
 
   if (authLoading || !user) {
     return (
@@ -42,18 +42,18 @@ export default function CartPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <CardHeader className="px-0">
-        <CardTitle className="font-headline text-4xl font-bold">Your Cart</CardTitle>
-        <CardDescription>Review and manage the items in your shopping cart.</CardDescription>
+        <CardTitle className="font-headline text-4xl font-bold">Tu Carrito</CardTitle>
+        <CardDescription>Revisa y gestiona los artículos en tu carrito de compras.</CardDescription>
       </CardHeader>
 
       {cartItems.length === 0 ? (
         <Card className="mt-8">
           <CardContent className="flex flex-col items-center justify-center p-12 text-center">
             <ShoppingBag className="h-16 w-16 text-muted-foreground/50 mb-4" />
-            <h3 className="font-headline text-2xl font-semibold">Your cart is empty</h3>
-            <p className="text-muted-foreground">Looks like you haven't added any cars yet.</p>
+            <h3 className="font-headline text-2xl font-semibold">Tu carrito está vacío</h3>
+            <p className="text-muted-foreground">Parece que aún no has agregado ningún auto.</p>
             <Button asChild className="mt-6">
-              <Link href="/">Start Shopping</Link>
+              <Link href="/">Empezar a Comprar</Link>
             </Button>
           </CardContent>
         </Card>
@@ -64,10 +64,10 @@ export default function CartPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-[120px]">Product</TableHead>
+                    <TableHead className="w-[120px]">Producto</TableHead>
                     <TableHead></TableHead>
-                    <TableHead>Price</TableHead>
-                    <TableHead className="w-[100px]">Quantity</TableHead>
+                    <TableHead>Precio</TableHead>
+                    <TableHead className="w-[100px]">Cantidad</TableHead>
                     <TableHead>Total</TableHead>
                     <TableHead className="w-[50px]"></TableHead>
                   </TableRow>
@@ -79,7 +79,7 @@ export default function CartPage() {
                         <Image src={item.imageUrl} alt={item.name} data-ai-hint={item.imageHint} width={100} height={75} className="rounded-md object-cover" />
                       </TableCell>
                       <TableCell className="font-medium">{item.name}</TableCell>
-                      <TableCell>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)}</TableCell>
+                      <TableCell>{new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(item.price)}</TableCell>
                       <TableCell>
                         <Input
                           type="number"
@@ -87,12 +87,12 @@ export default function CartPage() {
                           value={item.quantity}
                           onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
                           className="w-20"
-                          aria-label={`Quantity for ${item.name}`}
+                          aria-label={`Cantidad para ${item.name}`}
                         />
                       </TableCell>
-                      <TableCell>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price * item.quantity)}</TableCell>
+                      <TableCell>{new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(item.price * item.quantity)}</TableCell>
                       <TableCell>
-                        <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)} aria-label={`Remove ${item.name} from cart`}>
+                        <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)} aria-label={`Eliminar ${item.name} del carrito`}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </TableCell>
@@ -102,13 +102,13 @@ export default function CartPage() {
               </Table>
             </Card>
             <Button variant="outline" onClick={clearCart} className="mt-4">
-              Clear Cart
+              Vaciar Carrito
             </Button>
           </div>
           <div>
             <Card>
               <CardHeader>
-                <CardTitle className="font-headline">Order Summary</CardTitle>
+                <CardTitle className="font-headline">Resumen del Pedido</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between">
@@ -116,8 +116,8 @@ export default function CartPage() {
                   <span>{formattedTotal}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Taxes & Fees</span>
-                  <span>Calculated at checkout</span>
+                  <span>Impuestos y Tasas</span>
+                  <span>Calculado al pagar</span>
                 </div>
                 <hr/>
                 <div className="flex justify-between text-lg font-bold">
@@ -126,8 +126,8 @@ export default function CartPage() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button className="w-full" size="lg" onClick={() => toast({ title: "Coming Soon!", description: "Checkout functionality is not yet implemented."})}>
-                  Proceed to Checkout
+                <Button className="w-full" size="lg" onClick={() => toast({ title: "¡Próximamente!", description: "La funcionalidad de pago aún no está implementada."})}>
+                  Proceder al Pago
                 </Button>
               </CardFooter>
             </Card>

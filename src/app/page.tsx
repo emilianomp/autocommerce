@@ -16,10 +16,10 @@ export default async function Home() {
       <Card className="mb-8 border-none bg-transparent shadow-none">
         <CardHeader className="p-0">
           <CardTitle className="font-headline text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-            Find Your Next Ride
+            Encuentra Tu Próximo Viaje
           </CardTitle>
           <CardDescription className="max-w-2xl text-base text-muted-foreground md:text-lg">
-            Explore our curated collection of premium automobiles. The journey to your dream car starts here.
+            Explora nuestra colección curada de automóviles premium. El viaje hacia el auto de tus sueños comienza aquí.
           </CardDescription>
         </CardHeader>
       </Card>

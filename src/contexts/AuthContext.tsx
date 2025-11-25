@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser(JSON.parse(storedUser));
       }
     } catch (error) {
-      console.error("Failed to parse user from localStorage", error);
+      console.error("Error al analizar el usuario desde localStorage", error);
       localStorage.removeItem('autocommerce_user');
     } finally {
       setLoading(false);

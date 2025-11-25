@@ -10,16 +10,16 @@ export default function AdminPage() {
       <div className="flex items-center justify-between">
         <CardHeader className="p-0">
           <CardTitle className="font-headline text-4xl font-bold">
-            Manage Inventory
+            Gestionar Inventario
           </CardTitle>
           <CardDescription>
-            Add, edit, or remove cars from your e-commerce listing.
+            Agrega, edita o elimina autos de tu listado de e-commerce.
           </CardDescription>
         </CardHeader>
         <Button asChild>
           <Link href="/admin/add">
             <PlusCircle className="mr-2 h-4 w-4" />
-            Add New Car
+            Agregar Nuevo Auto
           </Link>
         </Button>
       </div>

@@ -45,14 +45,14 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
             type="text"
-            placeholder="Search by name or category..."
+            placeholder="Buscar por nombre o categoría..."
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
             }}
             className="pl-10"
-            aria-label="Search products"
+            aria-label="Buscar productos"
           />
         </div>
       </div>
@@ -67,8 +67,8 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
         <Card>
           <CardContent className="flex flex-col items-center justify-center p-12 text-center">
              <Search className="h-16 w-16 text-muted-foreground/50 mb-4" />
-             <h3 className="font-headline text-2xl font-semibold">No Cars Found</h3>
-             <p className="text-muted-foreground">Try adjusting your search terms.</p>
+             <h3 className="font-headline text-2xl font-semibold">No se encontraron autos</h3>
+             <p className="text-muted-foreground">Intenta ajustar tus términos de búsqueda.</p>
           </CardContent>
         </Card>
       )}
@@ -85,7 +85,9 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                 }}
                 aria-disabled={currentPage === 1}
                 className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
-              />
+              >
+                Anterior
+              </PaginationPrevious>
             </PaginationItem>
             {[...Array(totalPages)].map((_, i) => (
               <PaginationItem key={i}>
@@ -110,7 +112,9 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                 }}
                 aria-disabled={currentPage === totalPages}
                 className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
-              />
+              >
+                Siguiente
+              </PaginationNext>
             </PaginationItem>
           </PaginationContent>
         </Pagination>

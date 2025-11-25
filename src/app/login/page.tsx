@@ -22,27 +22,27 @@ export default function LoginPage() {
     <div className="flex min-h-[calc(100vh-8rem)] items-center justify-center bg-gray-50 dark:bg-gray-900">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="font-headline text-2xl">Admin Access</CardTitle>
-          <CardDescription>Enter your name to sign in (simulation)</CardDescription>
+          <CardTitle className="font-headline text-2xl">Acceso de Administrador</CardTitle>
+          <CardDescription>Ingresa tu nombre para iniciar sesión (simulación)</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">Nombre</Label>
               <Input
                 id="name"
                 type="text"
-                placeholder="Your Name"
+                placeholder="Tu Nombre"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                aria-label="Name for login"
+                aria-label="Nombre para iniciar sesión"
               />
             </div>
           </CardContent>
           <CardFooter>
             <Button type="submit" className="w-full" disabled={!name.trim()}>
-              Sign In
+              Iniciar Sesión
             </Button>
           </CardFooter>
         </form>

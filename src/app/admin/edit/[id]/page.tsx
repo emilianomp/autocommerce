@@ -32,11 +32,11 @@ export default function EditProductPage() {
           if (data) {
             setProduct(data);
           } else {
-            toast({ title: 'Error', description: 'Product not found.', variant: 'destructive' });
+            toast({ title: 'Error', description: 'Producto no encontrado.', variant: 'destructive' });
             router.push('/admin');
           }
         } catch (error) {
-          toast({ title: 'Error', description: 'Failed to fetch product data.', variant: 'destructive' });
+          toast({ title: 'Error', description: 'Error al cargar los datos del producto.', variant: 'destructive' });
         } finally {
           setLoading(false);
         }
@@ -57,8 +57,8 @@ export default function EditProductPage() {
     <div className="container mx-auto px-4 py-8">
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
-          <CardTitle className="font-headline text-3xl">Edit Car Details</CardTitle>
-          <CardDescription>Update the information for {product?.name}.</CardDescription>
+          <CardTitle className="font-headline text-3xl">Editar Detalles del Auto</CardTitle>
+          <CardDescription>Actualiza la información para {product?.name}.</CardDescription>
         </CardHeader>
         <CardContent>
           {product && <ProductForm product={product} />}

@@ -26,7 +26,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         setCartItems(JSON.parse(storedCart));
       }
     } catch (error) {
-      console.error("Failed to parse cart from localStorage", error);
+      console.error("Error al analizar el carrito desde localStorage", error);
       localStorage.removeItem('autocommerce_cart');
     }
   }, []);
@@ -46,16 +46,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       return [...prevItems, { ...product, quantity: 1 }];
     });
     toast({
-      title: "Added to Cart",
-      description: `${product.name} has been added to your cart.`,
+      title: "Añadido al Carrito",
+      description: `${product.name} ha sido añadido a tu carrito.`,
     });
   };
 
   const removeFromCart = (productId: string) => {
     setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
     toast({
-      title: "Item Removed",
-      description: `The item has been removed from your cart.`,
+      title: "Artículo Eliminado",
+      description: `El artículo ha sido eliminado de tu carrito.`,
     });
   };
 
@@ -74,8 +74,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const clearCart = () => {
     setCartItems([]);
      toast({
-      title: "Cart Cleared",
-      description: `Your cart has been emptied.`,
+      title: "Carrito Vaciado",
+      description: `Tu carrito ha sido vaciado.`,
     });
   };
 

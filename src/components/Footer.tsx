@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="border-t bg-background">
       <div className="container mx-auto px-4 py-6">
         <p className="text-center text-sm text-muted-foreground">
-          &copy; {currentYear} AutoCommerce. All rights reserved.
+          &copy; {currentYear} AutoCommerce. Todos los derechos reservados.
         </p>
       </div>
     </footer>
