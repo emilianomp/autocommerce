@@ -2,9 +2,9 @@ import { getProductById } from '@/lib/api';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import AddToCartButton from './AddToCartButton';
+import { Separator } from '@/components/ui/separator';
 
 interface ProductPageProps {
   params: {
@@ -43,15 +43,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </div>
           </CardHeader>
           <div className="flex flex-col">
-            <CardContent className="flex-grow p-6 md:p-8">
+            <CardContent className="flex-grow p-6 md:p-8 space-y-2">
               <Badge variant="secondary" className="mb-2">{product.category}</Badge>
-              <CardTitle className="font-headline text-3xl font-bold tracking-tight md:text-4xl">
-                {displayName}
-              </CardTitle>
-              <CardDescription className="mt-4 text-lg text-muted-foreground">
+              
+              <div className='space-y-1'>
+                <p className="text-lg font-medium text-muted-foreground">{product.brand}</p>
+                <CardTitle className="font-headline text-4xl font-bold tracking-tight md:text-5xl !-mt-1">
+                  {product.model}
+                </CardTitle>
+                <p className="text-base text-muted-foreground">{product.version}</p>
+              </div>
+
+              <CardDescription className="pt-4 text-base text-muted-foreground">
                 {product.description}
               </CardDescription>
-              <p className="mt-6 text-4xl font-bold text-primary">
+              
+              <Separator className="my-6" />
+
+              <p className="text-4xl font-bold text-primary">
                 {formattedPrice}
               </p>
             </CardContent>
