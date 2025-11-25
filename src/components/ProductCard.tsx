@@ -41,12 +41,16 @@ export default function ProductCard({ product }: ProductCardProps) {
         </CardHeader>
       </Link>
       <CardContent className="flex-grow p-4">
-        <CardTitle className="font-headline text-lg tracking-tight">
-          <Link href={`/products/${product.id}`} className="hover:text-primary">
-            {displayName}
-          </Link>
-        </CardTitle>
-        <CardDescription className="mt-1 text-base font-semibold text-primary">
+        <div className='space-y-0'>
+           <p className="text-sm font-medium text-muted-foreground">{product.brand}</p>
+          <CardTitle className="font-headline text-xl tracking-tight !mt-0">
+            <Link href={`/products/${product.id}`} className="hover:text-primary">
+              {product.model}
+            </Link>
+          </CardTitle>
+          <p className="text-sm text-muted-foreground">{product.version}</p>
+        </div>
+        <CardDescription className="mt-2 text-base font-semibold text-primary">
           {formattedPrice}
         </CardDescription>
       </CardContent>
