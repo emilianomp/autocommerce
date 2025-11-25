@@ -110,7 +110,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     localStorage.removeItem('autocommerce_user');
     setUser(null);
-    router.push('/login');
+    router.push('/');
   };
 
   return (
