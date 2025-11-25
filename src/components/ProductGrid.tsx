@@ -12,7 +12,7 @@ interface ProductGridProps {
   initialProducts: Product[];
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 8;
 
 export default function ProductGrid({ initialProducts }: ProductGridProps) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -59,7 +59,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
       </div>
 
       {paginatedProducts.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {paginatedProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
