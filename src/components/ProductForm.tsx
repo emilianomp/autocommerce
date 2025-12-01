@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -8,16 +9,16 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import type { Product } from '@/lib/types';
 import { createProduct, updateProduct } from '@/lib/api';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
+const MAX_FILE_SIZE = 300 * 1024; // 300 KB
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 const formSchema = z.object({
   brand: z.string().min(1, 'La marca es obligatoria'),
@@ -26,8 +27,26 @@ const formSchema = z.object({
   price: z.coerce.number().positive('El precio debe ser mayor que 0'),
   description: z.string().min(10, 'La descripción debe tener al menos 10 caracteres'),
   category: z.string().min(1, 'La categoría es obligatoria'),
-  imageId: z.string().min(1, 'La imagen es obligatoria'),
+  image: z.any()
+    .refine(
+      (files) => files?.[0], 
+      "La imagen es obligatoria."
+    )
+    .refine(
+      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
+      `El tamaño máximo de la imagen es de 300KB.`
+    )
+    .refine(
+      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
+      "Solo se aceptan formatos .jpg, .jpeg, .png y .webp."
+    ),
 });
+
+// Create a separate schema for editing since image is not required
+const editFormSchema = formSchema.extend({
+  image: z.any().optional(),
+});
+
 
 interface ProductFormProps {
   product?: Product;
@@ -46,7 +65,7 @@ export default function ProductForm({ product }: ProductFormProps) {
   }, [user, authLoading, router]);
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(product ? editFormSchema : formSchema),
     defaultValues: {
       brand: product?.brand || '',
       model: product?.model || '',
@@ -54,25 +73,40 @@ export default function ProductForm({ product }: ProductFormProps) {
       price: product?.price || 0,
       description: product?.description || '',
       category: product?.category || '',
-      imageId: PlaceHolderImages.find(img => img.imageUrl === product?.imageUrl)?.id || '',
+      image: undefined,
     },
   });
+  
+  const fileToDataUri = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
     try {
-      const selectedImage = PlaceHolderImages.find(img => img.id === values.imageId);
-      if (!selectedImage) {
-        throw new Error('Imagen seleccionada no válida');
+      let imageUrl = product?.imageUrl;
+
+      if (values.image && values.image[0]) {
+        const file = values.image[0];
+        imageUrl = await fileToDataUri(file);
+      }
+
+      if (!imageUrl) {
+        throw new Error('La imagen es obligatoria');
       }
 
       const productData = {
         ...values,
-        imageUrl: selectedImage.imageUrl,
-        imageHint: selectedImage.imageHint,
+        imageUrl: imageUrl,
+        imageHint: `${values.brand} ${values.model}`.toLowerCase(),
       };
       
-      delete (productData as any).imageId;
+      delete (productData as any).image;
 
       if (product) {
         await updateProduct(product.id, productData);
@@ -84,7 +118,8 @@ export default function ProductForm({ product }: ProductFormProps) {
       router.push('/admin');
       router.refresh();
     } catch (error) {
-      toast({ title: 'Error', description: `Error al ${product ? 'actualizar' : 'crear'} el producto.`, variant: 'destructive' });
+      const errorMessage = error instanceof Error ? error.message : `Error al ${product ? 'actualizar' : 'crear'} el producto.`;
+      toast({ title: 'Error', description: errorMessage, variant: 'destructive' });
       setIsSubmitting(false);
     }
   };
@@ -96,6 +131,8 @@ export default function ProductForm({ product }: ProductFormProps) {
       </div>
     );
   }
+  
+  const fileRef = form.register("image");
 
   return (
     <Form {...form}>
@@ -183,23 +220,17 @@ export default function ProductForm({ product }: ProductFormProps) {
             />
             <FormField
               control={form.control}
-              name="imageId"
+              name="image"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Imagen</FormLabel>
-                   <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona una imagen" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {PlaceHolderImages.map(img => (
-                        <SelectItem key={img.id} value={img.id}>{img.description}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormDescription>Elige una imagen de marcador de posición para el producto.</FormDescription>
+                  <FormControl>
+                     <Input type="file" {...fileRef} />
+                  </FormControl>
+                  <FormDescription>
+                    Sube una imagen para el producto (Máx 300KB).
+                    {product && " Dejar vacío para no modificar la imagen actual."}
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -218,3 +249,4 @@ export default function ProductForm({ product }: ProductFormProps) {
     </Form>
   );
 }
+
